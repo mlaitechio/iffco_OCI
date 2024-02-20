@@ -1,0 +1,11 @@
+PyPDF2
+pypdf 
+langchain 
+openai 
+tiktoken
+azure-search-documents==11.6.0b1
+azure-storage-blob 
+azure-identity
+flask==2.2.5
+flask-ngrok2
+pyngrok
