@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a3167e35.css",
+    "main.js": "/static/js/main.3d3a46d3.js",
+    "static/media/bg.jpg": "/static/media/bg.be1ccc61a5a6a9290943.jpg",
+    "static/media/bot.png": "/static/media/bot.0171b3074c21244031c9.png",
+    "static/media/MLAI Digital logo.png": "/static/media/MLAI Digital logo.81b7173ee1c8b2a39714.png",
+    "index.html": "/index.html",
+    "static/media/speech-processor.js": "/static/media/speech-processor.ce2b5f9ff72b7744205f.js",
+    "main.a3167e35.css.map": "/static/css/main.a3167e35.css.map",
+    "main.3d3a46d3.js.map": "/static/js/main.3d3a46d3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a3167e35.css",
+    "static/js/main.3d3a46d3.js"
+  ]
+}
