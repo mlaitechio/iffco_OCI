@@ -1,80 +1,11 @@
 # Import required libraries
 import os
-import json
-import openai
-from openai import AzureOpenAI
-#new imports
 from langchain_openai import ChatOpenAI
 from langchain_community.retrievers import AzureCognitiveSearchRetriever
-from langchain_community.document_loaders import PyPDFLoader
-#from dotenv import load_dotenv
-from tenacity import retry, wait_random_exponential, stop_after_attempt
+from tenacity import retry
 from azure.core.credentials import AzureKeyCredential
-from azure.search.documents import SearchClient, SearchIndexingBufferedSender
-from azure.search.documents.indexes import SearchIndexClient
-from azure.search.documents.models import (
-    QueryAnswerType,
-    QueryCaptionType,
-    QueryCaptionResult,
-    QueryAnswerResult,
-    SemanticErrorMode,
-    SemanticErrorReason,
-    SemanticSearchResultsType,
-    QueryType,
-    VectorizedQuery,
-    VectorQuery,
-    VectorFilterMode,
-)
-from azure.search.documents.indexes.models import (
-    ExhaustiveKnnAlgorithmConfiguration,
-    ExhaustiveKnnParameters,
-    SearchIndex,
-    SearchField,
-    SearchFieldDataType,
-    SimpleField,
-    SearchableField,
-    SearchIndex,
-    SemanticConfiguration,
-    SemanticPrioritizedFields,
-    SemanticField,
-    SearchField,
-    SemanticSearch,
-    VectorSearch,
-    HnswAlgorithmConfiguration,
-    HnswParameters,
-    VectorSearch,
-    VectorSearchAlgorithmConfiguration,
-    VectorSearchAlgorithmKind,
-    VectorSearchProfile,
-    SearchIndex,
-    SearchField,
-    SearchFieldDataType,
-    SimpleField,
-    SearchableField,
-    VectorSearch,
-    ExhaustiveKnnParameters,
-    SearchIndex,
-    SearchField,
-    SearchFieldDataType,
-    SimpleField,
-    SearchableField,
-    SearchIndex,
-    SemanticConfiguration,
-    SemanticField,
-    SearchField,
-    VectorSearch,
-    HnswParameters,
-    VectorSearch,
-    VectorSearchAlgorithmKind,
-    VectorSearchAlgorithmMetric,
-    VectorSearchProfile,
-)
-#from langchain.document_loaders import PyPDFDirectoryLoader, PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from azure.search.documents import SearchClient
 from langchain.chains import RetrievalQA
-from langchain.embeddings.openai import OpenAIEmbeddings
-#from langchain.chat_models import ChatOpenAI
-#from langchain.retrievers import AzureCognitiveSearchRetriever
 import locale
 locale.getpreferredencoding = lambda: "UTF-8"
 from flask import Flask, render_template, jsonify, request
@@ -92,8 +23,7 @@ index_name = 'iffco_original_pre'
 os.environ["AZURE_COGNITIVE_SEARCH_SERVICE_NAME"] = "testaicognitivesearch1"
 os.environ["AZURE_COGNITIVE_SEARCH_INDEX_NAME"] = index_name
 os.environ["AZURE_COGNITIVE_SEARCH_API_KEY"] = "6BogobGfe1c6vr67EzV6BgVB2HuIDhwcAboNznRQNlAzSeBE9FFi"
-os.environ["OPENAI_API_KEY"] = "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" #"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"
-
+os.environ["OPENAI_API_KEY"] = "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" 
 
 
 # Define Azure Cognitive Search as our retriever
@@ -111,7 +41,7 @@ qa_chain = RetrievalQA.from_chain_type(llm=ChatOpenAI(model_name=llm_name, tempe
 
 query = """which all officers have authority to hire helicopter for official purposes??"""
 
-result = qa_chain.invoke({"query": query}) #qa_chain
+result = qa_chain.invoke({"query": query})
 
 print(result['result'])
 
@@ -122,8 +52,6 @@ for doc in result['source_documents']:
     formatted_data += f"\n{doc.metadata['source']}#page={int(doc.metadata['page'])+1}\n"
 
 print(formatted_data)
-
-
 
 
 # from question_answering import qa_chain  # Assuming you have a function for QA
@@ -140,7 +68,7 @@ def hello():
 def ReturnJSON():
     if request.method == 'GET':
         query = request.args.get('query')  # Your specific query
-        result = qa_chain.invoke({"query": query}) #qa_chain
+        result = qa_chain.invoke({"query": query})
 
         formatted_data = ""
         for doc in result['source_documents']:
