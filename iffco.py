@@ -23,7 +23,7 @@ index_name = 'iffco_original_pre'
 os.environ["AZURE_COGNITIVE_SEARCH_SERVICE_NAME"] = "testaicognitivesearch1"
 os.environ["AZURE_COGNITIVE_SEARCH_INDEX_NAME"] = index_name
 os.environ["AZURE_COGNITIVE_SEARCH_API_KEY"] = "6BogobGfe1c6vr67EzV6BgVB2HuIDhwcAboNznRQNlAzSeBE9FFi"
-os.environ["OPENAI_API_KEY"] = "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" 
+os.environ["OPENAI_API_KEY"] = "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" 
 
 
 # Define Azure Cognitive Search as our retriever
