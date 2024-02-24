@@ -10,20 +10,22 @@ import locale
 locale.getpreferredencoding = lambda: "UTF-8"
 from flask import Flask, render_template, jsonify, request
 from flask_ngrok2 import run_with_ngrok
-
+from dotenv import load_dotenv
+from flask import Flask
+#from flask_cors import CORS
+load_dotenv()  # take environment variables from .env.
 
 search_client = SearchClient(endpoint='https://testaicognitivesearch1.search.windows.net', index_name="iffco_original_pre",\
                              credential= AzureKeyCredential('6BogobGfe1c6vr67EzV6BgVB2HuIDhwcAboNznRQNlAzSeBE9FFi'))
 
 
-
 llm_name ="gpt-3.5-turbo"
 index_name = 'iffco_original_pre'
 
-os.environ["AZURE_COGNITIVE_SEARCH_SERVICE_NAME"] = "testaicognitivesearch1"
-os.environ["AZURE_COGNITIVE_SEARCH_INDEX_NAME"] = index_name
-os.environ["AZURE_COGNITIVE_SEARCH_API_KEY"] = "6BogobGfe1c6vr67EzV6BgVB2HuIDhwcAboNznRQNlAzSeBE9FFi"
-os.environ["OPENAI_API_KEY"] = "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"
+AZURE_COGNITIVE_SEARCH_SERVICE_NAME = os.getenv("AZURE_COGNITIVE_SEARCH_SERVICE_NAME")
+AZURE_COGNITIVE_SEARCH_INDEX_NAME = os.getenv("AZURE_COGNITIVE_SEARCH_INDEX_NAME")
+AZURE_COGNITIVE_SEARCH_API_KEY = os.getenv("AZURE_COGNITIVE_SEARCH_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
 # Define Azure Cognitive Search as our retriever
@@ -43,7 +45,7 @@ query = """which all officers have authority to hire helicopter for official pur
 
 result = qa_chain.invoke({"query": query})
 
-print(result['result'])
+#print(result['result'])
 
 formatted_data = ""
 
@@ -57,6 +59,7 @@ print(formatted_data)
 # from question_answering import qa_chain  # Assuming you have a function for QA
 
 app = Flask(__name__, template_folder="build", static_folder="build/static") #/content/sample_data
+#CORS(app)
 run_with_ngrok(app=app, auth_token="2ezn7hLW396NuayqxsT4Z_3qPmzfFwmRUm9yABWc2nz")  # Start ngrok when app is run
 
 @app.route("/")
