@@ -45,7 +45,7 @@ query = """which all officers have authority to hire helicopter for official pur
 
 result = qa_chain.invoke({"query": query})
 
-#print(result['result'])
+print(result['result'])
 
 formatted_data = ""
 
@@ -56,7 +56,7 @@ for doc in result['source_documents']:
 print(formatted_data)
 
 
-# from question_answering import qa_chain  # Assuming you have a function for QA
+#from question_answering import qa_chain  # Assuming you have a function for QA
 
 app = Flask(__name__, template_folder="build", static_folder="build/static") #/content/sample_data
 #CORS(app)
