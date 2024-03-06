@@ -58,7 +58,7 @@ print(formatted_data)
 
 #from question_answering import qa_chain  # Assuming you have a function for QA
 
-app = Flask(__name__, template_folder="build", static_folder="build/static") #/content/sample_data
+app = Flask(__name__, template_folder="build", static_folder="build/static") #dist/assets #/content/sample_data
 #CORS(app)
 #run_with_ngrok(app=app, auth_token="2ezn7hLW396NuayqxsT4Z_3qPmzfFwmRUm9yABWc2nz")  # Start ngrok when app is run
 
