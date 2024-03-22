@@ -9,3 +9,7 @@ azure-identity
 flask==2.2.5
 flask-ngrok2
 pyngrok
+langchain_openai
+python-dotenv
+azure-identity
+flask-cors
